@@ -1,19 +1,19 @@
----
-title: "Analyzing US Census Data"
-format: html
-author: Sam Bruce
-execute:
-  echo: false
----
-
-```{r}
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #| message: false
 library(tidyverse)
 library(tidycensus)
 library(sf)
-```
-
-```{r}
+#
+#
+#
 #| message: false
 income_tx <- get_acs(
   geography = "county",
@@ -22,9 +22,9 @@ income_tx <- get_acs(
   year = 2020,
   geometry = TRUE
 )
-```
-
-```{r}
+#
+#
+#
 #| message: false
 #| cache: true
 edu_state <- get_acs(
@@ -33,9 +33,9 @@ edu_state <- get_acs(
   summary_var = "B15003_001",
   year = 2020
 )
-```
-
-```{r}
+#
+#
+#
 edu_state |>
   group_by(GEOID, NAME) |>
   summarise(
@@ -67,9 +67,9 @@ edu_state |>
     plot.title = element_text(face = "bold"),
     plot.caption = element_text(hjust = 0)
   )
-```
-
-```{r}
+#
+#
+#
 #| message: false
 age_ca <- get_acs(
   geography = "county",
@@ -81,26 +81,12 @@ age_ca <- get_acs(
   year = 2020,
   geometry = FALSE
 )
-```
-
-```{r}
-age_ca |>
-  select(NAME, variable, estimate) |>
-  pivot_wider(names_from = variable, values_from = estimate) |>
-  mutate(label = if_else(min_rank(desc(population)) <= 8, NAME, "")) |>
-  ggplot(aes(x = population, y = median_age)) +
-  geom_point(color = "#2c7fb8", alpha = 0.75, size = 2.5) +
-  geom_text(aes(label = label), hjust = -0.05, check_overlap = TRUE, size = 3) +
-  scale_x_log10(
-    labels = scales::label_number(scale_cut = scales::cut_short_scale()),
-    expand = expansion(mult = c(0.02, 0.25))
-  ) +
-  labs(
-    title = "Smaller California counties tend to be older (2020)",
-    x = "Population (log scale)",
-    y = "Median age",
-    caption = "Source: ACS 5-year estimates via tidycensus"
-  ) +
-  theme_minimal()
-```
-
+#
+#
+#
+print(age_ca)
+#
+#
+#
+#
+#
