@@ -1,0 +1,6 @@
+---
+title: "Analyzing US Census Data"
+format: html
+author: Sam Bruce
+---
+
